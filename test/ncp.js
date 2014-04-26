@@ -75,7 +75,7 @@ describe('ncp', function () {
   describe('when using transform', function () {
     it('file descriptors are passed correctly', function (cb) {
       ncp(src, out, {
-         transform: function(read,write,file) {
+         transform: function(read,write,file,target) {
             assert.notEqual(file.name, undefined);
             assert.strictEqual(typeof file.mode,'number');
             read.pipe(write);
