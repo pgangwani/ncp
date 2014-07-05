@@ -4,7 +4,8 @@ var assert = require('assert'),
     path = require('path'),
     rimraf = require('rimraf'),
     readDirFiles = require('read-dir-files'),
-    ncp = require('../').ncp;
+    ncp = require('../').ncp,
+    fs = require('fs');
 
 
 var fixtures = path.join(__dirname, 'fixtures'),
@@ -104,4 +105,32 @@ describe('ncp', function () {
       })
     })
   })
+
+  describe('when using inflateSymlinks', function(cb) {
+    it('copies the symlinked file instead of the symlink itself when true', function(cb) {
+      ncp(src, out, {
+        inflateSymlinks: true
+      }, function(err) {
+        if(err) return cb(err);
+
+        fs.lstat(path.join(out, 'g'), function(err, stat) {
+          assert.ok(!stat.isSymbolicLink());
+          cb();
+        });
+      })
+    });
+
+    it('copies the symlink when false', function(cb) {
+      ncp(src, out, {
+        inflateSymlinks: false
+      }, function(err) {
+        if(err) return cb(err);
+
+        fs.lstat(path.join(out, 'g'), function(err, stat) {
+          assert.ok(stat.isSymbolicLink());
+          cb();
+        });
+      })
+    });
+  });
 });
