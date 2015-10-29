@@ -1,4 +1,5 @@
-# ncp - Asynchronous recursive file & directory copying
+# ncp - Rise Vision Fork - Asynchronous recursive file & directory copying
+Forked for use within Electron, where require("fs") brings in an unwanted modified version of node's fs module.
 
 [![Build Status](https://secure.travis-ci.org/AvianFlu/ncp.png)](http://travis-ci.org/AvianFlu/ncp)
 
