@@ -6,6 +6,9 @@
   "bin": {
     "ncp": "./bin/ncp"
   },
+  "dependencies": {
+    "simple-git": "~1.16.0"
+  },
   "devDependencies": {
     "mocha": "1.15.x",
     "rimraf": "1.0.x",
